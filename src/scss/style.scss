@@ -15,7 +15,7 @@
   &__container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    min-height: 100vh;
+    min-height: 100dvh;
     padding: calc(30 * var(--width-multiplier)) calc(32 * var(--width-multiplier));
 
     @media (max-width: 1024px) {
@@ -299,7 +299,7 @@
   background-color: var(--dark, $dark);
 
   &__container {
-    height: 100vh;
+    min-height: 100dvh;
     padding: calc(30 * var(--width-multiplier));
 
     @media (max-width: 767px) {
@@ -395,7 +395,7 @@
   left: 0;
   right: 0;
   width: 100%;
-  height: 100vh;
+  min-height: 100dvh;
   background-color: var(--dark, $dark);
   z-index: 2;
 
