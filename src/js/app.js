@@ -165,6 +165,8 @@ function runPageTransition() {
   const blocks = pageTransition.querySelectorAll('.block');
   const preloaderStars = pageTransition.querySelectorAll('.preload .stars li');
   const counterNode = document.getElementById('a');
+  const topLine = pageTransition.querySelector('.line.top');
+  const bottomLine = pageTransition.querySelector('.line.bottom');
 
   gsap.set(blocks, { bottom: '100%' });
   gsap.set(preloaderStars, { autoAlpha: 0, y: -15 });
@@ -187,6 +189,17 @@ function runPageTransition() {
       autoAlpha: 0, y: 35, duration: 0.35, ease: 'power1.in', stagger: 0.06
     }, '+=0.1');
 
+  const lines = gsap.timeline({ paused: true });
+  lines.to(topLine, {
+    width: '100%',
+    duration: 2,
+    ease: 'power2.inOut'
+  }).to(bottomLine, {
+    width: '100%',
+    duration: 2,
+    ease: 'power2.inOut'
+  }, '<');
+
   const slideUp = gsap.timeline({ paused: true })
     .to(blocks, {
       bottom: '100%',
@@ -206,6 +219,11 @@ function runPageTransition() {
     const preloadPromise = new Promise(res => {
       loading.eventCallback('onComplete', res);
       loading.play(0);
+    });
+
+    const linesPromise = new Promise(res => {
+      lines.eventCallback('onComplete', res);
+      lines.play(0);
     });
 
     const counterPromise = runCounterTo42(counterNode, /*step*/6, /*tick*/700);

@@ -570,6 +570,35 @@ h6 {
   left: 75%;
 }
 
+.page-transition .loader-lines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.page-transition .loader-lines .line {
+  position: absolute;
+  height: calc(4 * var(--width-multiplier));
+  background: linear-gradient(90.18deg, #E4C081 0%, #BF964F 99.48%);
+  width: 0;
+}
+
+.page-transition .loader-lines .top {
+  top: 0;
+  left: 0;
+  transform-origin: right center;
+}
+
+.page-transition .loader-lines .bottom {
+  bottom: 0;
+  right: 0;
+  transform-origin: left center;
+}
+
 .preload {
   position: absolute;
   top: 50%;
