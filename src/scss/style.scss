@@ -263,7 +263,7 @@
     background-color: rgba(18, 18, 18, 1);
 
     @media (max-width: 767px) {
-      padding: calc(24 * var(--width-multiplier)) calc(16 * var(--width-multiplier));
+      padding: calc(16 * var(--width-multiplier));
     }
 
     img {
@@ -291,11 +291,11 @@
 }
 
 .finish {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  z-index: 3;
+  z-index: 30;
   background-color: var(--dark, $dark);
 
   &__container {
@@ -313,6 +313,7 @@
     flex-direction: column;
     justify-content: center;
     height: 100%;
+    min-height: calc(100dvh - calc(60 * var(--width-multiplier)));
     max-width: calc(690 * var(--width-multiplier));
     margin: 0 auto;
     padding: calc(54 * var(--width-multiplier));
@@ -321,6 +322,7 @@
     background-color: rgba(7, 8, 8, 1);
 
     @media (max-width: 767px) {
+      min-height: calc(100dvh - calc(32 * var(--width-multiplier)));
       padding: calc(16 * var(--width-multiplier));
       border-radius: calc(30 * var(--width-multiplier));
     }
@@ -390,17 +392,17 @@
 }
 
 .page-transition {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
   width: 100%;
   min-height: 100dvh;
   background-color: var(--dark, $dark);
-  z-index: 2;
+  z-index: 20;
 
   .block {
-    position: absolute;
+    position: fixed;
     background-color: rgba(18, 18, 18, 1);
     height: 100%;
     bottom: 100%;
@@ -519,8 +521,6 @@
 
 
 // new
-
-/* чтобы секции были управляемы JS-ом */
 .section-hidden {
   display: none;
 }
@@ -529,14 +529,9 @@
   display: block;
 }
 
-/* первая секция видима */
-.page-transition {
-  display: none;
-  pointer-events: none;
-  opacity: 0;
-}
-
+.page-transition,
 .finish {
   display: none;
   opacity: 0;
+  pointer-events: none;
 }

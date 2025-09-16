@@ -105,13 +105,23 @@
 // });
 
 
-function showSection(el, { duration = 0.35 } = {}) {
+const tweenTo = (target, vars) => new Promise(res => {
+  gsap.to(target, { ...vars, onComplete: res });
+});
+const tweenFromTo = (target, fromVars, toVars) => new Promise(res => {
+  gsap.fromTo(target, fromVars, { ...toVars, onComplete: res });
+});
+
+async function showSection(el, dur = 0.35) {
   el.style.display = 'block';
-  return gsap.to(el, { autoAlpha: 1, duration, ease: 'power2.out' });
+  el.style.pointerEvents = 'auto';
+  await tweenTo(el, { autoAlpha: 1, duration: dur, ease: 'power2.out' });
 }
-function hideSection(el, { duration = 0.25, displayNone = true } = {}) {
-  return gsap.to(el, { autoAlpha: 0, duration, ease: 'power2.in' })
-    .then(() => { if (displayNone) el.style.display = 'none'; });
+
+async function hideSection(el, dur = 0.25, displayNone = true) {
+  await tweenTo(el, { autoAlpha: 0, duration: dur, ease: 'power2.in' });
+  el.style.pointerEvents = 'none';
+  if (displayNone) el.style.display = 'none';
 }
 
 function makeCounter($wrap) {
@@ -241,7 +251,26 @@ function runPageTransition() {
   return flow;
 }
 
-function initFlow() {
+// function initFlow() {
+//   const form = document.querySelector('.hero .hero__form form');
+//   const hero = document.querySelector('.hero');
+//   const finish = document.querySelector('.finish');
+
+//   gsap.set(hero, { autoAlpha: 1, display: 'block' });
+//   gsap.set(finish, { autoAlpha: 0, display: 'none' });
+
+//   form.addEventListener('submit', async (e) => {
+//     e.preventDefault();
+
+//     await runPageTransition();
+
+//     await hideSection(hero, { duration: 0.25 });
+//     finish.style.display = 'block';
+//     gsap.fromTo(finish, { autoAlpha: 0, scale: 0.98 }, { autoAlpha: 1, scale: 1, duration: 0.35, ease: 'power2.out' });
+//   });
+// }
+
+async function initFlow() {
   const form = document.querySelector('.hero .hero__form form');
   const hero = document.querySelector('.hero');
   const finish = document.querySelector('.finish');
@@ -252,11 +281,18 @@ function initFlow() {
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    await runPageTransition();
+    const overlayShown = (async () => { await runPageTransition(); })();
+    await tweenTo(hero, { autoAlpha: 0, duration: 0.15, ease: 'power2.in' });
+    hero.style.display = 'none';
 
-    await hideSection(hero, { duration: 0.25 });
+    await overlayShown;
+
     finish.style.display = 'block';
-    gsap.fromTo(finish, { autoAlpha: 0, scale: 0.98 }, { autoAlpha: 1, scale: 1, duration: 0.35, ease: 'power2.out' });
+    await tweenFromTo(
+      finish,
+      { autoAlpha: 0, scale: 0.98 },
+      { autoAlpha: 1, scale: 1, duration: 0.35, ease: 'power2.out' }
+    );
   });
 }
 
