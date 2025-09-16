@@ -535,3 +535,33 @@
   opacity: 0;
   pointer-events: none;
 }
+
+.site-preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--dark, #0b0b0b);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__stars {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: calc(12 * var(--width-multiplier));
+    margin: 0;
+    padding: 0;
+
+    li img {
+      width: calc(28 * var(--width-multiplier));
+      height: calc(28 * var(--width-multiplier));
+      object-fit: contain;
+    }
+  }
+}
+
+html.is-preloading,
+body.is-preloading {
+  overflow: hidden;
+}

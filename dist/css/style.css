@@ -681,6 +681,37 @@ h6 {
   pointer-events: none;
 }
 
+.site-preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--dark, #0b0b0b);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.site-preloader__stars {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: calc(12 * var(--width-multiplier));
+  margin: 0;
+  padding: 0;
+}
+
+.site-preloader__stars li img {
+  width: calc(28 * var(--width-multiplier));
+  height: calc(28 * var(--width-multiplier));
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
+html.is-preloading,
+body.is-preloading {
+  overflow: hidden;
+}
+
 @media (min-width: 1024px) {
   .hero__right::before {
     content: none;
