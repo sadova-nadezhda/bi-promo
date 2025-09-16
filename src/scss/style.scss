@@ -15,7 +15,7 @@
   &__container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    height: 100vh;
+    min-height: 100vh;
     padding: calc(30 * var(--width-multiplier)) calc(32 * var(--width-multiplier));
 
     @media (max-width: 1024px) {
