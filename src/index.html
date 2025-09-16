@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+@@include('html/head.html', { "title": "Главная" })
+
+<body>
+  <main>
+    <section class="hero section-hidden">
+      <div class="hero__container">
+        <div class="hero__left hero__box">
+          <div class="hero__info">
+            <img src="@img/stars-1.svg" alt="" class="stars stars-1">
+            <img src="@img/stars-2.svg" alt="" class="stars stars-2">
+            <img src="@img/stars-3.svg" alt="" class="stars stars-3">
+            <h1 class="hero__title">
+              <span>Ищем</span>
+              <img src="@img/42.png" alt="">
+              <span>успешных жителей Алматы</span>
+            </h1>
+            <img src="@img/star.svg" alt="" class="star star-1">
+            <img src="@img/star.svg" alt="" class="star star-2">
+          </div>
+        </div>
+        <div class="hero__right hero__box">
+          <div class="hero__form">
+            <img src="@img/stars-4.svg" alt="">
+            <div class="hero__caption">Проверьте, есть ли вы в списке</div>
+            <form action="">
+              <input type="text" name="name" id="name" placeholder="Имя">
+              <input type="tel" name="phone" id="phone" placeholder="Телефон">
+              <button type="submit" class="button button-full button-primary">Проверить</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="page-transition section-hidden">
+      <div class="block"></div>
+      <div class="block"></div>
+      <div class="block"></div>
+      <div class="block"></div>
+
+      <div class="preload">
+        <div id="a"></div>
+        <ul class="stars">
+          <li><img src="@img/star-2.svg" alt=""></li>
+          <li><img src="@img/star-2.svg" alt=""></li>
+          <li><img src="@img/star-2.svg" alt=""></li>
+          <li><img src="@img/star-2.svg" alt=""></li>
+          <li><img src="@img/star-2.svg" alt=""></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="finish section-hidden">
+      <div class="finish__container">
+        <div class="finish__info">
+          <div class="finish__title">Кажется, вы еще не в списке самых успешных жителей Алматы</div>
+          <div class="finish__txt">с вами свяжется менеджер для включения вас в список</div>
+        </div>
+      </div>
+    </section>
+  </main>
+  @@include('html/foot.html')
+</body>
+
+</html>
