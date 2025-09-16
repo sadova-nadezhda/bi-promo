@@ -410,16 +410,24 @@ h6 {
   padding: calc(54 * var(--width-multiplier));
 }
 
+.hero__right::before,
 .hero__right::after {
   content: "";
   position: absolute;
   top: 50%;
-  right: calc(-34.5 * var(--width-multiplier));
   transform: translateY(-50%);
   width: calc(74 * var(--width-multiplier));
   height: calc(74 * var(--width-multiplier));
   background: url(../img/star-3.svg) center/cover no-repeat;
   z-index: 1;
+}
+
+.hero__right::before {
+  left: calc(-40 * var(--width-multiplier));
+}
+
+.hero__right::after {
+  right: calc(-35 * var(--width-multiplier));
 }
 
 .hero__title {
@@ -682,6 +690,12 @@ h6 {
   opacity: 0;
 }
 
+@media (min-width: 1024px) {
+  .hero__right::before {
+    content: none;
+  }
+}
+
 @media (max-width: 1024px) {
   :root {
     --width-base: 768;
@@ -805,10 +819,18 @@ h6 {
     padding: calc(32 * var(--width-multiplier));
   }
 
+  .hero__right::before,
   .hero__right::after {
-    right: calc(-25 * var(--width-multiplier));
     width: calc(54 * var(--width-multiplier));
     height: calc(54 * var(--width-multiplier));
+  }
+
+  .hero__right::before {
+    left: calc(-30 * var(--width-multiplier));
+  }
+
+  .hero__right::after {
+    right: calc(-25 * var(--width-multiplier));
   }
 
   .hero__caption {
