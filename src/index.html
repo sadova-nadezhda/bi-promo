@@ -31,12 +31,16 @@
           </div>
         </div>
         <div class="hero__right hero__box">
+          <ul class="hero__lang">
+            <li><a href="/" class="active">RU</a></li>
+            <li><a href="/kz">KZ</a></li>
+          </ul>
           <div class="hero__form">
             <img src="@img/stars-4.svg" alt="">
             <div class="hero__caption">Проверьте, есть ли вы в списке</div>
             <form action="">
-              <input type="text" name="name" id="name" placeholder="Имя">
-              <input type="tel" name="phone" id="phone" placeholder="Телефон">
+              <input type="text" name="name" id="name" placeholder="Имя" required>
+              <input type="tel" name="phone" id="phone" placeholder="Телефон" required>
               <button type="submit" class="button button-full button-primary">Проверить</button>
             </form>
           </div>

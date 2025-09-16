@@ -80,10 +80,10 @@ function markSitePreloaderShown() {
 /** Показать прелоудер и дождаться скрытия */
 async function runSitePreloaderIfNeeded() {
   const node = document.querySelector('.site-preloader');
-  if (!node) return; // нет разметки — ничего не делаем
+  if (!node) return;
 
   if (!shouldShowSitePreloader()) {
-    node.remove(); // не показываем — убираем из DOM
+    node.remove();
     return;
   }
 
@@ -149,7 +149,6 @@ function runPageTransition() {
     const linesPromise = new Promise(res => { lines.eventCallback('onComplete', res); lines.play(0); });
     const counterPromise = runCounterRange(counterNode, 42, 0, 6, 700);
 
-    // ЖДЁМ ВСЁ, включая линии (исправлено)
     await Promise.all([preloadPromise, linesPromise, counterPromise]);
 
     await new Promise(res => { slideUp.eventCallback('onComplete', res); slideUp.play(0); });
@@ -160,12 +159,25 @@ function runPageTransition() {
   return flow;
 }
 
+async function saveLead({ name, phone }) {
+  const body = new URLSearchParams({ name, phone });
+  const res = await fetch('/api/save_lead.php', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+    body: body.toString(),
+    credentials: 'same-origin'
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok || !data?.success) {
+    throw new Error(data?.message || 'Ошибка при сохранении заявки');
+  }
+  return data;
+}
+
 // ===== Init (после DOM) =====
 document.addEventListener('DOMContentLoaded', async () => {
-  // 1) Сначала — общий прелоудер (если нужен)
   await runSitePreloaderIfNeeded();
 
-  // 2) Затем — инициализация основного сценария
   const form = document.querySelector('.hero .hero__form form');
   const hero = document.querySelector('.hero');
   const finish = document.querySelector('.finish');
@@ -176,20 +188,18 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (form) {
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      // мгновенно гасим hero
       await tweenTo(hero, { autoAlpha: 0, duration: 0.15, ease: 'power2.in' });
       hero.style.display = 'none';
 
-      // запускаем переход
       await runPageTransition();
 
-      // показываем finish
       finish.style.display = 'block';
       await tweenFromTo(finish, { autoAlpha: 0, scale: 0.98 }, { autoAlpha: 1, scale: 1, duration: 0.35, ease: 'power2.out' });
     });
   }
 
   // 3) Маска телефона
+
   document.querySelectorAll('input[type="tel"]').forEach(function (input) {
     let keyCode;
     function mask(event) {

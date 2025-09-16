@@ -454,6 +454,25 @@ h6 {
   text-align: center;
 }
 
+.hero__lang {
+  position: absolute;
+  top: calc(32 * var(--width-multiplier));
+  right: calc(54 * var(--width-multiplier));
+  display: flex;
+  align-items: center;
+  gap: calc(8 * var(--width-multiplier));
+}
+
+.hero__lang a:not(.active) {
+  opacity: 0.5;
+  transition: opacity 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.hero__lang a:not(.active):hover {
+  opacity: 1;
+  color: var(--primary-light);
+}
+
 .hero__form {
   padding: calc(32 * var(--width-multiplier)) calc(22 * var(--width-multiplier));
   border: calc(1 * var(--width-multiplier)) solid rgb(49, 49, 49);
@@ -839,6 +858,7 @@ body.is-preloading {
 
   .hero__right {
     padding: calc(32 * var(--width-multiplier));
+    padding-top: calc(54 * var(--width-multiplier));
   }
 
   .hero__right::before,
@@ -858,6 +878,11 @@ body.is-preloading {
   .hero__caption {
     margin-bottom: calc(20 * var(--width-multiplier));
     font-size: calc(22 * var(--width-multiplier));
+  }
+
+  .hero__lang {
+    top: calc(24 * var(--width-multiplier));
+    right: calc(32 * var(--width-multiplier));
   }
 
   .hero__form {
